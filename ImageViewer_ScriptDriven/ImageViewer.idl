@@ -1,0 +1,176 @@
+//
+// ImageViewer.idl
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "dispex.idl";	// for IDispatchEx
+
+[
+	uuid(8A1E2595-2B00-4b06-BE07-A3FAD50DDD9D), // GUID for this type library
+	version(1.0),
+	helpstring("ImageViewer 1.0 Type Library")
+]
+library ImageViewerTypeLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	interface IDOM2EventTarget;
+
+	[
+		object,
+		uuid(FADBF3E7-73F5-4de6-8402-DDBD25307F0C),
+		dual
+	]
+	interface IApplication : IDOM2EventTarget
+	{
+		// Properties
+		[propget] HRESULT version([out, retval] BSTR* value);
+		[propget] HRESULT mainWindow([out, retval] IDispatch** ppdisp);
+		[propget] HRESULT imageProcessor([out, retval] IDispatch** ppdisp);
+		[propput] HRESULT onApplicationLoaded([in] IDispatch* pCallback);
+
+		// Methods
+		HRESULT getImageFile([in] IDispatch* pCallback);
+		HRESULT saveImageFile([in] IDispatch* pCallback);
+		HRESULT refreshDisplay();
+		HRESULT showAboutDialog();
+		HRESULT minimizeMainWindow();
+		HRESULT exitApplication();
+
+		// Constant values
+		[propget] HRESULT SUCCEEDED([out, retval] UINT* value);
+		[propget] HRESULT FAILED([out, retval] UINT* value);
+	}
+
+	[
+		object,
+		uuid(CF3285CE-BD22-4ab4-B2B6-410D6F8FF14A),
+		dual
+	]
+	interface IMainWindow : IDispatch
+	{
+		[propget] HRESULT buttons([out, retval] IDispatch** ppdisp);
+	}
+
+	[
+		object,
+		uuid(1AE5C12E-8B2E-4911-9053-EE5490A2BFC1),
+		dual
+	]
+	interface IButton : IDispatch
+	{
+		[propget] HRESULT id([out, retval] BSTR* value);
+		[propget] HRESULT enabled([out, retval] BOOL* value);
+		[propput] HRESULT enabled([in] BOOL value);
+	}
+
+	[
+		object,
+		uuid(A61F4187-848F-479d-842E-8D5383C43A82),
+		dual
+	]
+	interface IButtonSet : IDispatchEx
+	{
+	}
+
+	[
+		object,
+		uuid(AD5F5448-A154-43be-82A2-7F5C0AFCE967),
+		dual
+	]
+	interface IImageProcessor : IDispatch
+	{
+		// Methods
+		HRESULT load([in] BSTR filename);
+		HRESULT saveAs([in] BSTR filename);
+		HRESULT reload();
+		HRESULT invert();
+		HRESULT greyscale();
+		HRESULT isReady([out, retval] BOOL* ready);
+	}
+
+	[
+		object,
+		uuid(00A434AF-FA9B-46db-946E-98D208B13516),
+		dual
+	]
+	interface IViewerEvent : IDOM2Event
+	{
+		[propget] HRESULT id([out, retval] BSTR* value);
+	}
+
+
+	//////////////////////// DOM Level 2 Events /////////////////////////
+	[
+		object,
+		uuid(151485CC-9D11-4ea6-B7F6-3420382BBEB7),
+		dual
+	]
+	interface IDOM2EventTarget : IDispatch
+	{
+		HRESULT addEventListener(
+			[in] BSTR type, 
+			[in] IDispatch* pListener, 
+			[in] BOOL useCapture);
+
+		HRESULT removeEventListener(
+			[in] BSTR type, 
+			[in] IDispatch* pListener, 
+			[in] BOOL useCapture);
+
+		HRESULT dispatchEvent([in] IDispatch* pEvent, [out, retval] BOOL* value);
+	}
+
+	[
+		object,
+		uuid(86E3F687-7676-4c8f-BD82-BAA4800DA0F3),
+		dual
+	]
+	interface IDOM2EventListener : IDispatch
+	{
+		HRESULT handleEvent([in] IDispatch* pEvent);
+	}
+
+	[
+		object,
+		uuid(6D124E4C-2AE9-4d13-B1E3-8F856FC1FED4),
+		dual
+	]
+	interface IDOM2Event : IDispatch
+	{
+		[propget] HRESULT type([out, retval] BSTR* value);
+		[propget] HRESULT target([out, retval] IDispatch** ppDisp);
+		[propget] HRESULT currentTarget([out, retval] IDispatch** ppDisp);
+		[propget] HRESULT eventPhase([out, retval] USHORT* value);
+		[propget] HRESULT bubbles([out, retval] BOOL* value);
+		[propget] HRESULT cancelable([out, retval] BOOL* value);
+		[propget] HRESULT timeStamp([out, retval] DATE* value);
+
+		HRESULT stopPropagation();
+		HRESULT preventDefault();
+		HRESULT initEvent(
+			[in] BSTR typeArg, 
+			[in] BOOL canBubbleArg, 
+			[in] BOOL cancelableArg);
+
+		// value properties
+		[propget] HRESULT CAPTURING_PHASE([out, retval] USHORT* value);
+		[propget] HRESULT AT_TARGET([out, retval] USHORT* value);
+		[propget] HRESULT BUBBLING_PHASE([out, retval] USHORT* value);
+	}
+	
+
+	//////////////////////////////////////////////////////////////////////////////////////
+	[
+		uuid(ED6891B0-AAAB-4d0d-9A99-0BE9CBA22777), 
+		helpstring("ImageViewer COM class"),
+		appobject
+	]
+	coclass ImageViewerComObject
+	{
+		interface IApplication;
+	}
+}

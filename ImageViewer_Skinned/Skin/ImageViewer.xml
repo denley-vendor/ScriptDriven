@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ImageViewer version="1.1">
+		<MainWindow skin="main.jpg">
+				<ImageBox xpos="20" ypos="50" width="582" height="446"/>
+
+				<Button name="btn_Min" xpos="570" ypos="6" skin="btn_Min.jpg"/>
+				<Button name="btn_Exit" xpos="590" ypos="6" skin="btn_Exit.jpg"/>
+
+				<Button name="btn_Open" xpos="29" ypos="506" skin="btn_Open.jpg"/>
+				<Button name="btn_Reload" xpos="91" ypos="506" skin="btn_Reload.jpg"/>
+				<Button name="btn_Clean" xpos="163" ypos="506" skin="btn_Clean.jpg"/>
+				<Button name="btn_Invert" xpos="228" ypos="506" skin="btn_Invert.jpg"/>
+				<Button name="btn_Logo" xpos="294" ypos="506" skin="btn_Logo.jpg"/>
+				<Button name="btn_SaveAs" xpos="358" ypos="506" skin="btn_Save.jpg"/>
+				<Button name="btn_SystemTime" xpos="422" ypos="506" skin="btn_SystemTime.jpg"/>
+				<Button name="btn_About" xpos="526" ypos="506" skin="btn_About.jpg"/>
+		</MainWindow>
+</ImageViewer>

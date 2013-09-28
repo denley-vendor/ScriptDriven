@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ImageViewer version="1.1">
+		<MainWindow skin="main.jpg">
+				<ImageBox xpos="20" ypos="85" width="582" height="446"/>
+
+				<Button function="Minimize" xpos="565" ypos="6" skin="btn_Min.jpg"/>
+				<Button function="Exit" xpos="585" ypos="6" skin="btn_Exit.jpg"/>
+
+				<Button function="Open" xpos="21" ypos="40" skin="btn_Open.jpg"/>
+				<Button function="Invert" xpos="83" ypos="40" skin="btn_Invert.jpg"/>
+				<Button function="Save" xpos="149" ypos="40" skin="btn_Save.jpg"/>
+				<Button function="About" xpos="213" ypos="40" skin="btn_About.jpg"/>
+
+				<Hyperlink name="http://www.chery.cn" xpos="400" ypos="6" width="160" height="20"/>
+		</MainWindow>
+</ImageViewer>

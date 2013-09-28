@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ImageViewer version="1.2">
+	<MainWindow skin="main.jpg">
+		<ImageBox xpos="20" ypos="50" width="582" height="446"/>
+		<Button name="btn_Open" xpos="10" ypos="10" skin="btn_Open.jpg"/>
+		<Button name="btn_Reload" xpos="50" ypos="10" skin="btn_Reload.jpg"/>
+		<Hyperlink name="http://www.chery.cn" xpos="100" ypos="10"/>
+	</MainWindow>
+</ImageViewer>

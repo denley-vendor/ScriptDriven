@@ -1,0 +1,38 @@
+//
+// curves.idl
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(8F7156EC-E3C4-4f29-9E9F-312713079F47), // GUID for this type library
+	version(1.0),
+	helpstring("curves 1.0 Type Library")
+]
+library curvesTypeLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		object,
+		uuid(1ECBE81A-B69C-4a02-924D-C128F5B2C654),
+		dual
+	]
+	interface ICurvePainter : IDispatch
+	{
+		HRESULT Result([in] long i, [in] double x, [in] double y);
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////////
+	[
+		uuid(31273E15-FB31-4d54-9239-E6BBA4F18507), 
+		helpstring("CurvePainter COM class"),
+		appobject
+	]
+	coclass CCurvePainter
+	{
+		interface ICurvePainter;
+	}
+}

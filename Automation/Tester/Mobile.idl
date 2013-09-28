@@ -1,0 +1,49 @@
+//
+// Mobile.idl
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(8F121977-5566-7788-9900-112233445566), // LIBID_MobileTypeLib
+	version(1.0),
+	helpstring("Mobile 1.0 Type Library")
+]
+library MobileTypeLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		object,
+		uuid(1ECBE81A-B69C-4a02-924D-C1C2A1A2B1B2), // IID_IMobile
+		dual
+	]
+	interface IMobile : IDispatch
+	{
+		[propget, helpstring("Return the type of the mobile.")] 
+		HRESULT type([out, retval] BSTR *pVal);
+		[propput, helpstring("Set a type for the mobile.")] 
+		HRESULT type([in] BSTR newVal);
+
+		[propget, helpstring("Return the color of the mobile.")] 
+		HRESULT color([out, retval] long *pVal);
+		[propput, helpstring("Set a color for the mobile.")] 
+		HRESULT color([in] long newVal);
+
+		[helpstring("Call the specified phone number.")] 
+		HRESULT Call([in] BSTR phoneNumber);
+	}
+
+	////////////////////////////////////////////////////////////////////
+	[
+		uuid(31273E15-1977-1988-2006-E6BBA4F18507), // CLSID_Mobile
+		helpstring("Mobile COM class"),
+		appobject
+	]
+	coclass Mobile
+	{
+		[default] dispinterface IMobile;
+	}
+}

@@ -1,0 +1,201 @@
+//
+// js_demo.idl
+//
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "dispex.idl";	// for IDispatchEx
+
+[
+	uuid(54CCF8B2-9184-4ae6-87B4-333F8B37FB09), // GUID for this type library
+	version(1.0),
+	helpstring("js_demo 1.0 Type Library")
+]
+library js_demoTypeLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+
+	// The standard properties and methods each script object should support.
+	[
+		object,
+		uuid(F26C43E6-4C40-47b8-9BD0-CCE78212D81C),
+		dual
+	]
+	interface IJSObject : IDispatch
+	{
+		[id(DISPID_VALUE), propget] HRESULT _internalValue([out, retval] VARIANT* value); 
+	/*	[id(DISPID_CONSTRUCTOR), propget] HRESULT constructor([out, retval] VARIANT* value);
+		[propget] HRESULT prototype([out, retval] VARIANT* value);
+		[propput] HRESULT prototype([in] VARIANT value);*/
+
+		HRESULT toString([out, retval] BSTR* value);
+		HRESULT toLocaleString([out, retval] BSTR* value);
+	/*	HRESULT valueOf([out, retval] VARIANT* value);
+		HRESULT hasOwnProperty([in] BSTR propName, [out, retval] BOOL* pRet);
+		HRESULT isPrototypeOf([in] VARIANT var, [out, retval] BOOL* pRet);
+		HRESULT propertyIsEnumerable([in] BSTR propName, [out, retval] BOOL* pRet);*/
+	}
+
+	[
+		object,
+		uuid(5F5CF86B-C508-44e5-886E-EBA51272B155),
+		dual
+	]
+	interface IJSArray : IDispatch
+	{
+		[id(1), propget] HRESULT length([out, retval] UINT* value);
+	}
+
+
+	[
+		object,
+		uuid(E74835F6-EBDD-49b2-986D-234B70AF74E4),
+		dual
+	]
+	interface IApplication : IDispatch
+	{
+		[propget] HRESULT car([out, retval] IDispatch** ppdisp);
+
+		HRESULT alert([in] BSTR msg);
+		HRESULT triggerException();
+		HRESULT getInformation([in] BSTR key, [in] IDispatch* pCallback);
+		HRESULT reviewScripts();
+		HRESULT copyFile([in] BSTR srcFile, [in] BSTR dstFile, [in] IDispatch* pCallback);
+		HRESULT createTimer(
+			[in] UINT interval, 
+			[in] BOOL bAutoReset, 
+			[in] IDispatch* pTimerProc, 
+			[out, retval] IDispatch** ppdisp
+			);
+		HRESULT pauseForDebugger();
+	}
+
+	[
+		object,
+		uuid(47618B91-709C-4ff1-B93E-6E584608D70A),
+		dual
+	]
+	interface ITimer : IDispatch
+	{
+		[propget] HRESULT enabled([out, retval] BOOL* pRet);
+		[propput] HRESULT enabled([in] BOOL pVal);
+		[propget] HRESULT interval([out, retval] UINT* pVal);
+	}
+
+	[
+		object,
+		uuid(94363495-8AF0-41fe-BE8A-E75F334AA3CB),
+		dual
+	]
+	interface IMediaPlayer : IDispatch
+	{
+		[propget] HRESULT majorVersion([out, retval] UINT *pVal);
+		[propget] HRESULT minorVersion([out, retval] UINT *pVal);
+		[propget] HRESULT vendor([out, retval] BSTR *pVal);
+		[propget] HRESULT currentPosition([out, retval] UINT *pVal);
+		[propput] HRESULT currentPosition([in] UINT pVal);
+
+		HRESULT play([in] BSTR mediaFile);
+		HRESULT pauseOn();
+		HRESULT pauseOff();
+		HRESULT stop();
+	}
+
+	[
+		object,
+		uuid(47934566-02E5-4fd3-ADF3-361D651AFFE4),
+		dual
+	]
+	interface IDebugger : IDispatch
+	{
+		HRESULT trace([in] BSTR category, [in] BSTR info);
+		HRESULT addBlankLine([in] UINT lineCount);
+	}
+
+	[
+		object,
+		uuid(4D1C82AB-0C6A-4dcc-82D9-946967D6BB95),
+		dual
+	]
+	interface ICar : IDispatch
+	{
+		[propget] HRESULT engine([out, retval] IDispatch** ppdisp);
+		[propget] HRESULT wheels([out, retval] IDispatch** ppdisp);
+
+		HRESULT createWheel([in] BSTR brand, [in] BSTR color, [out, retval] IDispatch** ppdisp);
+		HRESULT installWheel([in] IDispatch* pdisp, [in] UINT index);
+		HRESULT installWheel2([in] VARIANT pVar, [in] UINT index);
+		HRESULT createEnhancedWheel([in] BSTR brand, [in] BSTR color, [out, retval] IDispatch** ppdisp);
+		HRESULT createDynamicWheel([in] BSTR brand, [in] BSTR color, [out, retval] IDispatch** ppdisp);
+	}
+
+	[
+		object,
+		uuid(6B1D7032-333E-45a4-9EA9-F0B8951A55F0),
+		dual
+	]
+	interface IEngine : IDispatch
+	{
+		[propget] HRESULT brand([out, retval] BSTR* pVal);
+
+		HRESULT run();
+	}
+
+	[
+		object,
+		uuid(FD4DD4EC-9CA9-44cd-9EFA-301B8A7124BD),
+		dual
+	]
+	interface IWheel : IDispatch
+	{
+		[propget] HRESULT brand([out, retval] BSTR* pVal);
+		[propget] HRESULT color([out, retval] BSTR* pVal);
+
+		HRESULT rotate();
+		HRESULT adjustParameters([in] BSTR param1, [in] UINT param2, [in] UINT param3);
+	}
+
+	[
+		object,
+		uuid(194180A3-14B7-4b56-A1F5-6974A3C383B9),
+		dual
+	]
+	interface IEnhancedWheel : IJSObject
+	{
+		[propget] HRESULT brand([out, retval] BSTR* pVal);
+		[propget] HRESULT color([out, retval] BSTR* pVal);
+
+		HRESULT rotate();
+		HRESULT adjustParameters([in] BSTR param1, [in] UINT param2, [in] UINT param3);
+	}
+
+	[
+		object,
+		uuid(C6410B31-9D3A-4cc2-BD90-FA2186231A09), 
+		dual
+	]
+	interface IDynamicWheel : IDispatchEx
+	{
+		[propget] HRESULT brand([out, retval] BSTR* pVal);
+		[propget] HRESULT color([out, retval] BSTR* pVal);
+
+		HRESULT rotate();
+		HRESULT adjustParameters([in] BSTR param1, [in] UINT param2, [in] UINT param3);
+	}
+
+
+	//////////////////////////////////////////////////////////////////////////////////////
+	[
+		uuid(3B722F09-B63E-4609-B7DE-C7CC34A7652C), 
+		helpstring("js_demo COM class"),
+		appobject
+	]
+	coclass js_demoComObject
+	{
+		interface IApplication;
+		interface IMediaPlayer;
+		interface IDebugger;
+	}
+}

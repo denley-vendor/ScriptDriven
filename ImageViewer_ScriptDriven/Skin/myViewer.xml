@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ImageViewer version="1.1">
+		<MainWindow skin="main.jpg">
+				<ImageBox xpos="20" ypos="85" width="582" height="446"/>
+
+				<Button id="btn_Min" function="Minimize" xpos="565" ypos="6" skin="btn_Min.jpg"/>
+				<Button id="btn_Exit" function="Exit" xpos="585" ypos="6" skin="btn_Exit.jpg"/>
+
+				<Button id="btn_Open" function="Open" xpos="21" ypos="40" skin="btn_Open.jpg"/>
+				<Button id="btn_Reload" xpos="83" ypos="40" skin="btn_Reload.jpg"/>
+				<Button id="btn_Invert" function="Invert" xpos="155" ypos="40" skin="btn_Invert.jpg"/>
+				<Button id="btn_Greyscale" function="Greyscale" xpos="221" ypos="40" skin="btn_Greyscale.jpg"/>
+				<Button id="btn_Save" function="Save" xpos="293" ypos="40" skin="btn_Save.jpg"/>
+				<Button id="btn_About" function="About" xpos="357" ypos="40" skin="btn_About.jpg"/>
+
+				<Static xpos="428" ypos="33" skin="logo_ScriptDriven.jpg"/>
+				<Hyperlink name="http://www.chery.cn" xpos="400" ypos="6" width="160" height="20"/>
+				<Script source="main.js"/>
+		</MainWindow>
+</ImageViewer>
